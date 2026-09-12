@@ -25,3 +25,7 @@ pnpm-debug.log*
 
 # Cursor local
 .cursor/
+
+# AI agent docs (local only)
+AGENTS.md
+CLAUDE.md
