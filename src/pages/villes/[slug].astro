@@ -1,0 +1,170 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CtaButton from '../../components/CtaButton.astro';
+import Faq from '../../components/Faq.astro';
+import { cities, services, site, whatsappUrl } from '../../data/site';
+import { cityContent } from '../../data/cityContent';
+
+export function getStaticPaths() {
+  return cities.map((city) => ({
+    params: { slug: city.slug },
+    props: { city },
+  }));
+}
+
+const { city } = Astro.props;
+const content = cityContent[city.slug];
+const otherCities = cities.filter((c) => c.slug !== city.slug);
+
+const localBusinessLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: `${site.name} — ${city.name}`,
+  description: city.metaDescription,
+  url: `${site.url}/villes/${city.slug}`,
+  telephone: site.phone,
+  email: site.email,
+  image: `${site.url}/logo.png`,
+  areaServed: {
+    '@type': 'City',
+    name: city.name,
+    containedInPlace: { '@type': 'Country', name: 'Maroc' },
+  },
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: city.name,
+    addressRegion: city.region,
+    addressCountry: 'MA',
+  },
+  sameAs: [site.instagram],
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: `Services DevStudio à ${city.name}`,
+    itemListElement: services.map((s) => ({
+      '@type': 'Offer',
+      itemOffered: {
+        '@type': 'Service',
+        name: s.title,
+        url: `${site.url}${s.href}`,
+      },
+    })),
+  },
+};
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: (content?.faqs ?? []).map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer },
+  })),
+};
+---
+
+<BaseLayout
+  title={city.title}
+  description={city.metaDescription}
+  canonicalPath={`/villes/${city.slug}`}
+  jsonLd={[localBusinessLd, faqLd]}
+>
+  <article class="mx-auto max-w-3xl px-4 py-14 sm:px-6 sm:py-20">
+    <Breadcrumbs
+      items={[
+        { name: 'Villes', href: '/villes' },
+        { name: city.name, href: `/villes/${city.slug}` },
+      ]}
+    />
+
+    <p class="label-caps text-primary">{city.focusKeywords[0]}</p>
+    <h1 class="mt-2 text-4xl font-bold sm:text-5xl">{city.title}</h1>
+    <p class="mt-5 text-lg leading-relaxed text-muted">{city.intro}</p>
+
+    <div class="mt-8 flex flex-wrap gap-3">
+      <CtaButton
+        href={whatsappUrl(`Bonjour, je suis à ${city.name} et je souhaite un devis.`)}
+        label="Devis WhatsApp"
+      />
+      <CtaButton href="/services" label="Nos services" variant="secondary" />
+    </div>
+
+    {
+      content?.sections.map((section) => (
+        <section class="mt-12">
+          <h2 class="text-2xl font-bold">{section.heading}</h2>
+          {section.paragraphs.map((p) => (
+            <p class="mt-4 leading-relaxed text-muted">{p}</p>
+          ))}
+        </section>
+      ))
+    }
+
+    <section class="mt-12">
+      <h2 class="text-2xl font-bold">Services proposés à {city.name}</h2>
+      <ul class="mt-4 grid gap-3 sm:grid-cols-2">
+        {
+          services.map((s) => (
+            <li>
+              <a
+                href={s.href}
+                class="block rounded-[var(--radius-md)] border border-line bg-soft px-4 py-3 text-sm font-semibold text-text hover:border-primary hover:text-primary"
+              >
+                {s.title}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    {
+      content?.faqs?.length ? (
+        <section class="mt-12">
+          <h2 class="mb-6 text-2xl font-bold">FAQ — {city.name}</h2>
+          <Faq items={content.faqs} />
+        </section>
+      ) : null
+    }
+
+    <section class="relative mt-12 overflow-hidden rounded-[var(--radius-md)] bg-text px-6 py-10 text-white">
+      <div class="dither-primary absolute inset-0 opacity-25" aria-hidden="true"></div>
+      <div class="relative">
+        <h2 class="text-2xl font-bold">Lancer votre projet à {city.name}</h2>
+        <p class="mt-3 text-sm text-white/70">
+          DevStudio — sites web, applications web et mobiles. Réponse rapide sur WhatsApp.
+        </p>
+        <div class="mt-6">
+          <CtaButton
+            href={whatsappUrl(`Bonjour DevStudio, projet à ${city.name}.`)}
+            label="Contacter DevStudio"
+          />
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-12">
+      <h2 class="text-lg font-semibold">Autres villes</h2>
+      <ul class="mt-3 flex flex-wrap gap-3">
+        {
+          otherCities.map((c) => (
+            <li>
+              <a href={`/villes/${c.slug}`} class="text-sm font-medium text-primary hover:underline">
+                {c.name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="mt-4">
+        <a href="/villes" class="text-sm font-semibold text-primary hover:underline">
+          Voir toutes les villes →
+        </a>
+        {' · '}
+        <a href="/blog" class="text-sm font-semibold text-primary hover:underline">
+          Guides SEO sur le blog →
+        </a>
+      </p>
+    </section>
+  </article>
+</BaseLayout>

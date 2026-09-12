@@ -1,0 +1,49 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+---
+
+<ServiceLayout
+  title="Développement d’applications web sur mesure au Maroc"
+  description="Applications web métier, dashboards et plateformes sur mesure pour entreprises marocaines. DevStudio — Dakhla, El Kelaa, Casablanca."
+  path="/services/applications-web"
+  h1="Applications web"
+  serviceName="Développement d’applications web"
+  serviceSlug="applications-web"
+  intro="Automatisez vos processus avec une application web sur mesure : CRM léger, portail client, back-office, réservations, inventaire — accessible depuis n’importe quel navigateur."
+  sections={[
+    {
+      heading: "Cas d'usage",
+      list: [
+        'Gestion interne et tableaux de bord',
+        'Portails clients / partenaires',
+        'Outils de réservation et planning',
+        'Automatisation de workflows métier',
+      ],
+    },
+    {
+      heading: 'Pourquoi DevStudio',
+      body: 'Nous livrons des interfaces simples à utiliser, sécurisées, et maintenables — avec un accompagnement local pour Dakhla et El Kelaa des Sraghna, et une capacité de livraison pour Casablanca et le reste du Maroc.',
+    },
+  ]}
+  links={[
+    { href: '/services/sites-web', label: 'Sites web' },
+    { href: '/services/applications-mobiles', label: 'Applications mobiles' },
+    { href: '/services/e-commerce', label: 'E-commerce' },
+    { href: '/blog/site-vitrine-vs-application-web', label: 'Site vitrine vs application web' },
+  ]}
+  localAnchorPrefix="Application web"
+  faqs={[
+    {
+      question: 'Quelle différence entre site web et application web ?',
+      answer:
+        'Un site présente et informe. Une application web permet d’agir : gérer des données, comptes clients, workflows, tableaux de bord.',
+    },
+    {
+      question: 'Quelles technologies utilisez-vous ?',
+      answer:
+        'Selon le besoin : stacks modernes type React/Next, Astro, API Node, bases SQL/NoSQL. Nous choisissons l’outil adapté à votre budget et votre maintenance.',
+    },
+  ]}
+  ctaMessage="Bonjour, je veux une application web."
+  ctaLabel="Parler de mon app web"
+/>

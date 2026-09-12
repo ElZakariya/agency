@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="DevStudio">
+  <rect width="240" height="240" fill="#FFFFFF"/>
+  <rect x="20" y="20" width="200" height="200" rx="8" fill="#3B82F6"/>
+  <!-- dither dots -->
+  <g fill="#8B5CF6" opacity="0.45">
+    <circle cx="48" cy="48" r="2"/><circle cx="60" cy="56" r="2"/><circle cx="72" cy="48" r="2"/>
+    <circle cx="54" cy="68" r="2"/><circle cx="66" cy="76" r="2"/><circle cx="78" cy="68" r="2"/>
+    <circle cx="168" cy="52" r="2"/><circle cx="180" cy="60" r="2"/><circle cx="192" cy="52" r="2"/>
+    <circle cx="174" cy="72" r="2"/><circle cx="186" cy="80" r="2"/>
+  </g>
+  <text x="120" y="128" text-anchor="middle" fill="#FFFFFF" font-family="Space Grotesk, sans-serif" font-size="52" font-weight="700">DS</text>
+  <text x="120" y="168" text-anchor="middle" fill="#FFFFFF" font-family="IBM Plex Mono, monospace" font-size="14" letter-spacing="2">DEVSTUDIO</text>
+</svg>

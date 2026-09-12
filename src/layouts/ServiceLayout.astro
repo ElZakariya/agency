@@ -1,0 +1,162 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import CtaButton from '../components/CtaButton.astro';
+import Faq from '../components/Faq.astro';
+import Icon from '../components/Icon.astro';
+import LocalCoverage from '../components/LocalCoverage.astro';
+import ServiceImage from '../components/ServiceImage.astro';
+import { site, cities, getService, whatsappUrl } from '../data/site';
+import type { ServiceIcon } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  h1: string;
+  intro: string;
+  sections: { heading: string; body?: string; list?: string[] }[];
+  links?: { href: string; label: string }[];
+  faqs: { question: string; answer: string }[];
+  ctaMessage: string;
+  ctaLabel: string;
+  serviceName: string;
+  serviceSlug: string;
+  localAnchorPrefix?: string;
+}
+
+const {
+  title,
+  description,
+  path,
+  h1,
+  intro,
+  sections,
+  links = [],
+  faqs,
+  ctaMessage,
+  ctaLabel,
+  serviceName,
+  serviceSlug,
+  localAnchorPrefix = h1,
+} = Astro.props;
+
+const service = getService(serviceSlug);
+const ogImage = service?.ogImage ?? site.ogImage;
+const imageAlt = service?.imageAlt ?? serviceName;
+const icon = (service?.icon ?? 'monitor') as ServiceIcon;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath={path}
+  ogImage={ogImage}
+  jsonLd={[
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      name: serviceName,
+      provider: { '@type': 'Organization', name: site.name, url: site.url },
+      areaServed: cities.map((c) => ({
+        '@type': 'City',
+        name: c.name,
+        containedInPlace: { '@type': 'Country', name: 'Maroc' },
+      })),
+      description,
+      image: `${site.url}${ogImage}`,
+      url: `${site.url}${path}`,
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.question,
+        acceptedAnswer: { '@type': 'Answer', text: f.answer },
+      })),
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'ImageObject',
+      contentUrl: `${site.url}${ogImage}`,
+      description: imageAlt,
+      name: serviceName,
+    },
+  ]}
+>
+  <article class="mx-auto max-w-3xl px-4 py-14 sm:px-6 sm:py-20">
+    <Breadcrumbs
+      items={[
+        { name: 'Services', href: '/services' },
+        { name: h1, href: path },
+      ]}
+    />
+
+    <div class="mt-6 overflow-hidden rounded-[var(--radius-md)] border border-line">
+      <ServiceImage
+        slug={serviceSlug}
+        alt={imageAlt}
+        class="aspect-[16/10] w-full object-cover"
+        sizes="(max-width: 768px) 100vw, 768px"
+        priority
+      />
+    </div>
+
+    <div class="mt-8 flex items-center gap-3">
+      <span class="inline-flex h-12 w-12 items-center justify-center rounded-[var(--radius-sm)] bg-primary/10 text-primary">
+        <Icon name={icon} size={24} />
+      </span>
+      <h1 class="text-4xl font-bold sm:text-5xl">{h1}</h1>
+    </div>
+    <p class="mt-5 text-lg leading-relaxed text-muted">{intro}</p>
+
+    {
+      sections.map((section) => (
+        <section class="mt-12">
+          <h2 class="text-2xl font-bold">{section.heading}</h2>
+          {section.body && <p class="mt-4 leading-relaxed text-muted">{section.body}</p>}
+          {section.list && (
+            <ul class="mt-4 space-y-3">
+              {section.list.map((item) => (
+                <li class="flex gap-3 text-muted">
+                  <span class="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                    <Icon name="arrow-right" size={14} />
+                  </span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
+      ))
+    }
+
+    <LocalCoverage anchorPrefix={localAnchorPrefix} />
+
+    {
+      links.length > 0 && (
+        <section class="mt-12">
+          <h2 class="text-2xl font-bold">Voir aussi</h2>
+          <ul class="mt-3 space-y-2 text-sm">
+            {links.map((l) => (
+              <li>
+                <a class="inline-flex items-center gap-1.5 font-medium text-primary hover:underline" href={l.href}>
+                  {l.label}
+                  <Icon name="arrow-right" size={14} />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    <div class="mt-12">
+      <Faq items={faqs} />
+    </div>
+    <div class="mt-12">
+      <CtaButton href={whatsappUrl(ctaMessage)} label={ctaLabel} />
+    </div>
+  </article>
+</BaseLayout>

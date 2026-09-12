@@ -1,0 +1,51 @@
+---
+import { Image } from 'astro:assets';
+import sitesWeb from '../assets/images/service-sites-web.png';
+import applicationsWeb from '../assets/images/service-applications-web.png';
+import applicationsMobiles from '../assets/images/service-applications-mobiles.png';
+import ecommerce from '../assets/images/service-e-commerce.png';
+
+interface Props {
+  slug: string;
+  alt: string;
+  class?: string;
+  widths?: number[];
+  sizes?: string;
+  loading?: 'lazy' | 'eager';
+  priority?: boolean;
+}
+
+const images = {
+  'sites-web': sitesWeb,
+  'applications-web': applicationsWeb,
+  'applications-mobiles': applicationsMobiles,
+  'e-commerce': ecommerce,
+} as const;
+
+const {
+  slug,
+  alt,
+  class: className = '',
+  widths = [480, 800, 1200],
+  sizes = '(max-width: 768px) 100vw, 560px',
+  loading = 'lazy',
+  priority = false,
+} = Astro.props;
+
+const src = images[slug as keyof typeof images];
+if (!src) {
+  throw new Error(`Unknown service image slug: ${slug}`);
+}
+---
+
+<Image
+  src={src}
+  alt={alt}
+  widths={widths}
+  sizes={sizes}
+  loading={priority ? 'eager' : loading}
+  decoding="async"
+  format="webp"
+  quality={82}
+  class={className}
+/>

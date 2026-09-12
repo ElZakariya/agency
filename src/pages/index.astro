@@ -1,0 +1,234 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaButton from '../components/CtaButton.astro';
+import Icon from '../components/Icon.astro';
+import ServiceImage from '../components/ServiceImage.astro';
+import { Image } from 'astro:assets';
+import heroImage from '../assets/images/hero-devstudio.png';
+import { site, services, cities, whatsappUrl } from '../data/site';
+import type { ServiceIcon } from '../data/site';
+
+const highlights: { title: string; body: string; icon: 'checklist' | 'rocket' | 'support' }[] = [
+  {
+    icon: 'checklist',
+    title: 'Livrables clairs',
+    body: 'Chaque projet part d’un brief net : périmètre, délais, budget et critères de succès.',
+  },
+  {
+    icon: 'rocket',
+    title: 'Produit prêt à convertir',
+    body: 'Design soigné, performance, SEO technique et CTA WhatsApp intégrés dès le départ.',
+  },
+  {
+    icon: 'support',
+    title: 'Accompagnement après lancement',
+    body: 'Mise en ligne, formation, petites évolutions — on reste joignables sur WhatsApp.',
+  },
+];
+
+const steps: { n: string; t: string; d: string; icon: 'brief' | 'build' | 'launch' }[] = [
+  {
+    n: '01',
+    icon: 'brief',
+    t: 'Brief & devis',
+    d: 'Vous nous décrivez le besoin. On clarifie objectifs, délais et budget.',
+  },
+  {
+    n: '02',
+    icon: 'build',
+    t: 'Design & build',
+    d: 'Maquettes, développement web/mobile, tests et SEO technique.',
+  },
+  {
+    n: '03',
+    icon: 'launch',
+    t: 'Lancement',
+    d: 'Mise en ligne, formation, suivi — et WhatsApp toujours ouvert.',
+  },
+];
+---
+
+<BaseLayout
+  title={`${site.name} — ${site.tagline}`}
+  description={site.description}
+  canonicalPath="/"
+  ogImage="/images/hero-devstudio.png"
+  jsonLd={{
+    '@context': 'https://schema.org',
+    '@type': 'ProfessionalService',
+    name: site.name,
+    description: site.description,
+    url: site.url,
+    telephone: site.phone,
+    email: site.email,
+    image: [`${site.url}/images/hero-devstudio.png`, `${site.url}/logo.png`],
+    areaServed: cities.map((c) => ({
+      '@type': 'City',
+      name: c.name,
+      containedInPlace: { '@type': 'Country', name: 'Maroc' },
+    })),
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Services DevStudio',
+      itemListElement: services.map((s) => ({
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: s.title,
+          description: s.description,
+          url: `${site.url}${s.href}`,
+          image: `${site.url}${s.ogImage}`,
+        },
+      })),
+    },
+    sameAs: [site.instagram],
+    address: { '@type': 'PostalAddress', ...site.address },
+  }}
+>
+  <section class="relative isolate min-h-[88vh] overflow-hidden bg-text text-white">
+    <div class="absolute inset-0 -z-10">
+      <Image
+        src={heroImage}
+        alt="DevStudio — création de sites web, applications web et mobiles pour entreprises au Maroc"
+        widths={[640, 960, 1280, 1920]}
+        sizes="100vw"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+        format="webp"
+        quality={78}
+        class="h-full w-full object-cover"
+      />
+      <div class="absolute inset-0 bg-[linear-gradient(105deg,rgba(17,24,39,0.92)_0%,rgba(17,24,39,0.78)_48%,rgba(17,24,39,0.55)_100%)]" aria-hidden="true"></div>
+      <div class="dither absolute inset-0 opacity-[0.18]" style="background-image:radial-gradient(circle,#fff 0.7px,transparent 0.8px);background-size:5px 5px" aria-hidden="true"></div>
+    </div>
+
+    <div class="mx-auto flex min-h-[88vh] max-w-6xl flex-col justify-center px-4 py-20 sm:px-6">
+      <p class="hero-fade font-display text-5xl font-bold tracking-tight sm:text-7xl md:text-8xl">
+        {site.name}
+      </p>
+      <h1 class="hero-fade-delay mt-5 max-w-2xl text-balance font-display text-2xl font-semibold leading-snug text-white/95 sm:text-3xl md:text-4xl">
+        Sites web, apps & mobile pour entreprises au Maroc
+      </h1>
+      <p class="hero-fade-delay mt-5 max-w-xl font-body text-base leading-relaxed text-white/70 sm:text-lg">
+        De l’idée au produit en ligne : sites vitrines, applications métier, apps mobiles et e-commerce — conçus pour convertir.
+      </p>
+      <div class="hero-fade-delay mt-9 flex flex-wrap gap-3">
+        <CtaButton href={whatsappUrl()} label="Devis WhatsApp" variant="primary" />
+        <CtaButton href="/services" label="Voir nos services" variant="ghost" />
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-soft py-20 sm:py-24" id="services">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="reveal max-w-2xl">
+        <p class="label-caps text-primary">Services</p>
+        <h2 class="mt-2 text-3xl font-bold sm:text-4xl">Ce que nous développons</h2>
+        <p class="mt-3 text-muted">
+          Une offre claire pour passer de l’idée au produit digital — site, application ou boutique en ligne.
+        </p>
+      </div>
+
+      <ul class="mt-12 grid gap-6 sm:grid-cols-2">
+        {
+          services.map((service, i) => (
+            <li class="reveal overflow-hidden dither-panel" style={`transition-delay: ${i * 70}ms`}>
+              <a href={service.href} class="group block">
+                <div class="relative aspect-[16/10] overflow-hidden bg-soft">
+                  <ServiceImage
+                    slug={service.slug}
+                    alt={service.imageAlt}
+                    class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+                    sizes="(max-width: 640px) 100vw, 50vw"
+                    priority={i === 0}
+                  />
+                </div>
+                <div class="relative p-7 sm:p-8">
+                  <span class="inline-flex h-11 w-11 items-center justify-center rounded-[var(--radius-sm)] bg-primary/10 text-primary">
+                    <Icon name={service.icon as ServiceIcon} size={22} />
+                  </span>
+                  <h3 class="mt-4 font-display text-2xl font-semibold text-text group-hover:text-primary">
+                    {service.title}
+                  </h3>
+                  <p class="mt-3 text-sm leading-relaxed text-muted">{service.description}</p>
+                  <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
+                    Découvrir
+                    <Icon name="arrow-right" size={16} />
+                  </span>
+                </div>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="reveal mt-10 text-center sm:text-left">
+        <CtaButton href="/services" label="Tous les services" variant="secondary" />
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 sm:py-24">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="reveal max-w-2xl">
+        <p class="label-caps text-secondary">Approche</p>
+        <h2 class="mt-2 text-3xl font-bold sm:text-4xl">Pourquoi travailler avec nous</h2>
+        <p class="mt-3 text-muted">
+          Moins de jargon, plus de livrables utiles — un partenaire digital focalisé sur le résultat.
+        </p>
+      </div>
+
+      <ul class="mt-12 grid gap-8 sm:grid-cols-3">
+        {
+          highlights.map((item, i) => (
+            <li class="reveal" style={`transition-delay: ${i * 80}ms`}>
+              <span class="inline-flex h-12 w-12 items-center justify-center rounded-[var(--radius-sm)] border border-line bg-soft text-primary">
+                <Icon name={item.icon} size={22} />
+              </span>
+              <h3 class="mt-4 font-display text-xl font-semibold">{item.title}</h3>
+              <p class="mt-3 text-sm leading-relaxed text-muted">{item.body}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="relative overflow-hidden border-y border-line py-20">
+    <div class="dither-soft absolute inset-0 opacity-50" aria-hidden="true"></div>
+    <div class="relative mx-auto max-w-6xl px-4 sm:px-6">
+      <h2 class="reveal text-3xl font-bold sm:text-4xl">Comment on travaille</h2>
+      <ol class="mt-10 grid gap-8 sm:grid-cols-3">
+        {
+          steps.map((step) => (
+            <li class="reveal">
+              <span class="inline-flex h-12 w-12 items-center justify-center rounded-[var(--radius-sm)] bg-primary text-white">
+                <Icon name={step.icon} size={22} />
+              </span>
+              <p class="mt-4 font-mono text-sm font-medium text-primary">{step.n}</p>
+              <h3 class="mt-2 text-xl font-semibold">{step.t}</h3>
+              <p class="mt-2 text-sm text-muted">{step.d}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="py-20 sm:py-24">
+    <div class="reveal mx-auto max-w-6xl px-4 text-center sm:px-6">
+      <span class="mx-auto inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366]/15 text-[#128C7E]">
+        <Icon name="whatsapp" size={28} />
+      </span>
+      <h2 class="mt-5 text-3xl font-bold sm:text-4xl">Prêt à lancer votre projet ?</h2>
+      <p class="mx-auto mt-3 max-w-xl text-muted">
+        Envoyez-nous un message WhatsApp — réponse rapide, devis clair, sans engagement.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        <CtaButton href={whatsappUrl()} label="Écrire sur WhatsApp" />
+        <CtaButton href="/contact" label="Page contact" variant="secondary" />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

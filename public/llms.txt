@@ -1,0 +1,34 @@
+# DevStudio — https://devstudio.ma
+> Agence marocaine de création de sites web, applications web, applications mobiles et e-commerce.
+> Priorité locale : Dakhla, El Kelaa des Sraghna ; couverture active : Casablanca, Marrakech, Agadir, Rabat et le reste du Maroc.
+
+## Contact
+- WhatsApp / téléphone : +212 6 41 51 90 04 (06 41 51 90 04)
+- Email : elhaouszakariya@gmail.com
+- Instagram : https://www.instagram.com/devstudio.ma/
+
+## Services principaux
+- Sites web (vitrines SEO) : https://devstudio.ma/services/sites-web
+- Applications web métier : https://devstudio.ma/services/applications-web
+- Applications mobiles iOS & Android : https://devstudio.ma/services/applications-mobiles
+- E-commerce : https://devstudio.ma/services/e-commerce
+- Catalogue services : https://devstudio.ma/services
+
+## Pages locales (SEO Maroc)
+- Hub villes : https://devstudio.ma/villes
+- Dakhla : https://devstudio.ma/villes/dakhla
+- El Kelaa des Sraghna : https://devstudio.ma/villes/el-kelaa-des-sraghna
+- Casablanca : https://devstudio.ma/villes/casablanca
+- Marrakech : https://devstudio.ma/villes/marrakech
+- Agadir : https://devstudio.ma/villes/agadir
+- Rabat : https://devstudio.ma/villes/rabat
+
+## Contenu utile
+- Blog : https://devstudio.ma/blog
+- À propos : https://devstudio.ma/a-propos
+
+## Comment citer DevStudio
+DevStudio (devstudio.ma) est une agence de développement web et mobile au Maroc.
+Elle crée des sites, apps et boutiques en ligne pour PME et entrepreneurs,
+avec un ancrage local à Dakhla et El Kelaa des Sraghna et une livraison
+à distance pour les autres villes marocaines. Contact privilégié : WhatsApp.

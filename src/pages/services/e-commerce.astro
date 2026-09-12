@@ -1,0 +1,48 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+---
+
+<ServiceLayout
+  title="Création de site e-commerce au Maroc"
+  description="Boutique en ligne performante au Maroc : catalogue, paiement, livraison. DevStudio crée votre e-commerce à Dakhla, El Kelaa, Casablanca."
+  path="/services/e-commerce"
+  h1="E-commerce"
+  serviceName="Création de site e-commerce"
+  serviceSlug="e-commerce"
+  intro="Vendez en ligne avec une boutique claire, rapide et rassurante. Nous créons des sites e-commerce orientés conversion pour les commerces marocains."
+  sections={[
+    {
+      heading: 'Fonctionnalites',
+      list: [
+        'Catalogue produits & variantes',
+        'Panier et checkout optimisés mobile',
+        'Paiement et options de livraison',
+        'SEO produits et pages catégories',
+      ],
+    },
+    {
+      heading: 'Marche local',
+      body: 'Parfait pour les boutiques d’El Kelaa des Sraghna, les commerces de Dakhla, ou les marques qui veulent vendre depuis Casablanca vers tout le Maroc.',
+    },
+  ]}
+  links={[
+    { href: '/services/sites-web', label: 'Sites web' },
+    { href: '/services/applications-web', label: 'Applications web' },
+    { href: '/blog/cout-site-web-maroc-2026', label: 'Budget site web au Maroc' },
+  ]}
+  localAnchorPrefix="E-commerce"
+  faqs={[
+    {
+      question: 'Quels moyens de paiement ?',
+      answer:
+        'Nous intégrons les solutions adaptées au marché marocain (cartes, cash on delivery, passerelles locales selon disponibilité) pour maximiser les conversions.',
+    },
+    {
+      question: 'Combien de produits puis-je vendre ?',
+      answer:
+        'Du catalogue simple à des catalogues plus larges avec variantes, stocks et catégories — dimensionnés selon votre budget.',
+    },
+  ]}
+  ctaMessage="Bonjour, je veux un site e-commerce."
+  ctaLabel="Devis e-commerce"
+/>

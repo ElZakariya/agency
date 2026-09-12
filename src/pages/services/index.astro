@@ -1,0 +1,101 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CtaButton from '../../components/CtaButton.astro';
+import Faq from '../../components/Faq.astro';
+import Icon from '../../components/Icon.astro';
+import LocalCoverage from '../../components/LocalCoverage.astro';
+import ServiceImage from '../../components/ServiceImage.astro';
+import { site, services, whatsappUrl } from '../../data/site';
+import type { ServiceIcon } from '../../data/site';
+
+const faqs = [
+  {
+    question: 'Quels types de projets réalisez-vous ?',
+    answer:
+      'Sites vitrines, sites institutionnels, applications web métier, applications mobiles iOS/Android et boutiques e-commerce pour entreprises au Maroc.',
+  },
+  {
+    question: 'Travaillez-vous à distance partout au Maroc ?',
+    answer:
+      'Oui. Nous livrons en remote pour tout le Maroc, avec échanges WhatsApp, appels et livrables clairs à chaque étape.',
+  },
+  {
+    question: 'Comment démarrer ?',
+    answer:
+      'Contactez-nous sur WhatsApp avec une courte description de votre besoin. Nous vous répondons avec un devis indicatif et les prochaines étapes.',
+  },
+];
+---
+
+<BaseLayout
+  title="Services de développement web, apps & mobile"
+  description="Découvrez les services DevStudio : création de sites web, applications web, applications mobiles et e-commerce au Maroc."
+  canonicalPath="/services"
+  ogImage="/images/og-default.png"
+  jsonLd={{
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    itemListElement: services.map((s, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: s.title,
+      url: `${site.url}${s.href}`,
+      image: `${site.url}${s.ogImage}`,
+    })),
+  }}
+>
+  <section class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
+    <Breadcrumbs items={[{ name: 'Services', href: '/services' }]} />
+    <h1 class="max-w-3xl text-4xl font-bold sm:text-5xl">Nos services digitaux</h1>
+    <p class="mt-4 max-w-2xl text-lg text-muted">
+      DevStudio conçoit et développe des produits numériques pour les entreprises marocaines — du site vitrine à l’application mobile.
+    </p>
+
+    <ul class="mt-14 grid gap-6 sm:grid-cols-2">
+      {
+        services.map((service, i) => (
+          <li class="reveal overflow-hidden dither-panel">
+            <a href={service.href} class="group block">
+              <div class="relative aspect-[16/10] overflow-hidden bg-soft">
+                <ServiceImage
+                  slug={service.slug}
+                  alt={service.imageAlt}
+                  class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+                  sizes="(max-width: 640px) 100vw, 50vw"
+                  priority={i < 2}
+                />
+              </div>
+              <div class="relative p-7 sm:p-8">
+                <span class="inline-flex h-11 w-11 items-center justify-center rounded-[var(--radius-sm)] bg-primary/10 text-primary">
+                  <Icon name={service.icon as ServiceIcon} size={22} />
+                </span>
+                <h2 class="mt-4 font-display text-2xl font-semibold group-hover:text-primary">
+                  {service.title}
+                </h2>
+                <p class="mt-3 text-sm leading-relaxed text-muted">{service.description}</p>
+                <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
+                  Voir le détail
+                  <Icon name="arrow-right" size={16} />
+                </span>
+              </div>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="reveal">
+      <LocalCoverage anchorPrefix="Agence web" heading="Disponibles dans vos villes" />
+    </div>
+
+    <div class="reveal mt-16">
+      <h2 class="mb-6 text-2xl font-bold">Questions fréquentes</h2>
+      <Faq items={faqs} />
+    </div>
+
+    <div class="reveal mt-14 text-center">
+      <CtaButton href={whatsappUrl('Bonjour, je souhaite des infos sur vos services.')} label="Demander un devis" />
+    </div>
+  </section>
+</BaseLayout>

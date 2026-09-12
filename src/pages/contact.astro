@@ -1,0 +1,141 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import CtaButton from '../components/CtaButton.astro';
+import Icon from '../components/Icon.astro';
+import { site, whatsappUrl } from '../data/site';
+---
+
+<BaseLayout
+  title="Contact DevStudio — devis site web & apps au Maroc"
+  description="Contactez DevStudio pour un devis : WhatsApp, email ou téléphone. Agence web à Dakhla, El Kelaa des Sraghna et Casablanca."
+  canonicalPath="/contact"
+  jsonLd={{
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    name: 'Contact DevStudio',
+    url: `${site.url}/contact`,
+  }}
+>
+  <section class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
+    <Breadcrumbs items={[{ name: 'Contact', href: '/contact' }]} />
+    <div class="grid gap-12 lg:grid-cols-2">
+      <div>
+        <h1 class="text-4xl font-bold sm:text-5xl">Contact</h1>
+        <p class="mt-4 text-lg text-muted">
+          Parlez-nous de votre projet — WhatsApp est le moyen le plus rapide pour un devis.
+        </p>
+
+        <ul class="mt-8 space-y-5 text-sm">
+          <li class="flex gap-3">
+            <span class="mt-1 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-[var(--radius-sm)] bg-[#25D366]/15 text-[#128C7E]">
+              <Icon name="whatsapp" size={20} />
+            </span>
+            <div>
+              <span class="label-caps">WhatsApp</span>
+              <a
+                href={whatsappUrl()}
+                class="mt-1 block text-lg font-semibold text-primary hover:underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {site.phoneDisplay}
+              </a>
+            </div>
+          </li>
+          <li class="flex gap-3">
+            <span class="mt-1 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-[var(--radius-sm)] bg-primary/10 text-primary">
+              <Icon name="mail" size={20} />
+            </span>
+            <div>
+              <span class="label-caps">Email</span>
+              <a href={`mailto:${site.email}`} class="mt-1 block text-lg font-semibold text-text hover:text-primary">
+                {site.email}
+              </a>
+            </div>
+          </li>
+          <li class="flex gap-3">
+            <span class="mt-1 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-[var(--radius-sm)] bg-primary/10 text-primary">
+              <Icon name="phone" size={20} />
+            </span>
+            <div>
+              <span class="label-caps">Téléphone</span>
+              <a href={`tel:${site.phone.replace(/\s/g, '')}`} class="mt-1 block text-lg font-semibold text-text hover:text-primary">
+                {site.phoneDisplay}
+              </a>
+            </div>
+          </li>
+          <li class="flex gap-3">
+            <span class="mt-1 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-[var(--radius-sm)] bg-primary/10 text-primary">
+              <Icon name="map-pin" size={20} />
+            </span>
+            <div>
+              <span class="label-caps">Adresse</span>
+              <p class="mt-1 text-text">
+                {site.address.streetAddress}<br />
+                {site.address.postalCode} {site.address.addressLocality}<br />
+                Maroc
+              </p>
+            </div>
+          </li>
+          <li>
+            <span class="label-caps">Instagram</span>
+            <a href={site.instagram} class="mt-1 inline-block font-semibold text-primary hover:underline" target="_blank" rel="noopener noreferrer">
+              @devstudio.ma
+            </a>
+          </li>
+        </ul>
+
+        <div class="mt-10">
+          <CtaButton href={whatsappUrl()} label="Ouvrir WhatsApp" />
+        </div>
+      </div>
+
+      <div class="dither-panel p-7 sm:p-9">
+        <div class="relative">
+          <h2 class="font-display text-2xl font-semibold">Demande de devis</h2>
+          <p class="mt-2 text-sm text-muted">
+            Formulaire indicatif (envoi via votre client mail). Pour une réponse plus rapide, préférez WhatsApp.
+          </p>
+          <form class="mt-6 space-y-4" action={`mailto:${site.email}`} method="get" enctype="text/plain">
+            <div>
+              <label for="name" class="block text-sm font-medium text-text">Nom</label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                required
+                class="mt-1.5 min-h-11 w-full rounded-[var(--radius-sm)] border border-line bg-surface px-3 py-2.5 text-sm outline-none focus:border-primary"
+                placeholder="Votre nom"
+              />
+            </div>
+            <div>
+              <label for="city" class="block text-sm font-medium text-text">Ville</label>
+              <input
+                id="city"
+                name="city"
+                type="text"
+                class="mt-1.5 min-h-11 w-full rounded-[var(--radius-sm)] border border-line bg-surface px-3 py-2.5 text-sm outline-none focus:border-primary"
+                placeholder="Dakhla, El Kelaa, Casablanca…"
+              />
+            </div>
+            <div>
+              <label for="message" class="block text-sm font-medium text-text">Projet</label>
+              <textarea
+                id="message"
+                name="body"
+                rows="5"
+                required
+                class="mt-1.5 w-full rounded-[var(--radius-sm)] border border-line bg-surface px-3 py-2.5 text-sm outline-none focus:border-primary"
+                placeholder="Site vitrine, app, e-commerce…"
+              ></textarea>
+            </div>
+            <button type="submit" class="btn-primary w-full sm:w-auto">
+              Envoyer par email
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

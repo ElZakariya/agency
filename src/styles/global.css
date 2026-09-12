@@ -1,0 +1,182 @@
+@import "tailwindcss";
+@import "@fontsource/space-grotesk/500.css";
+@import "@fontsource/space-grotesk/600.css";
+@import "@fontsource/space-grotesk/700.css";
+@import "@fontsource/open-sans/400.css";
+@import "@fontsource/open-sans/500.css";
+@import "@fontsource/open-sans/600.css";
+@import "@fontsource/open-sans/700.css";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+
+@theme {
+  --color-primary: #3b82f6;
+  --color-primary-hover: #2563eb;
+  --color-secondary: #8b5cf6;
+  --color-success: #16a34a;
+  --color-warning: #d97706;
+  --color-danger: #dc2626;
+  --color-surface: #ffffff;
+  --color-text: #111827;
+  --color-muted: #4b5563;
+  --color-soft: #f3f4f6;
+  --color-line: #e5e7eb;
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Open Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-5: 24px;
+  --spacing-6: 32px;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    @apply bg-surface font-body text-text antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display tracking-tight text-text;
+  }
+
+  a {
+    @apply transition-colors duration-150;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--color-primary) 28%, white);
+  }
+}
+
+@layer components {
+  /* Halftone / dither shade simulation with limited palette */
+  .dither {
+    background-image: radial-gradient(circle, var(--color-text) 0.85px, transparent 0.9px);
+    background-size: 5px 5px;
+  }
+
+  .dither-primary {
+    background-image: radial-gradient(circle, var(--color-primary) 0.9px, transparent 1px);
+    background-size: 6px 6px;
+  }
+
+  .dither-secondary {
+    background-image: radial-gradient(circle, var(--color-secondary) 0.9px, transparent 1px);
+    background-size: 6px 6px;
+  }
+
+  .dither-soft {
+    background-image: radial-gradient(circle, color-mix(in srgb, var(--color-text) 18%, transparent) 0.8px, transparent 0.9px);
+    background-size: 4px 4px;
+  }
+
+  .dither-panel {
+    @apply relative overflow-hidden rounded-[var(--radius-md)] border border-line bg-surface;
+  }
+
+  .dither-panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.35;
+    background-image: radial-gradient(circle, var(--color-text) 0.7px, transparent 0.8px);
+    background-size: 5px 5px;
+  }
+
+  .label-caps {
+    @apply font-mono text-sm uppercase tracking-[0.08em] text-muted;
+  }
+
+  .btn-primary {
+    @apply inline-flex min-h-11 items-center justify-center rounded-[var(--radius-sm)] bg-primary px-5 py-3 font-display text-sm font-semibold text-white hover:bg-primary-hover;
+  }
+
+  .btn-secondary {
+    @apply inline-flex min-h-11 items-center justify-center rounded-[var(--radius-sm)] border border-line bg-surface px-5 py-3 font-display text-sm font-semibold text-text hover:border-primary hover:text-primary;
+  }
+
+  .btn-ghost {
+    @apply inline-flex min-h-11 items-center justify-center rounded-[var(--radius-sm)] border border-white/40 bg-transparent px-5 py-3 font-display text-sm font-semibold text-white hover:bg-white/10;
+  }
+}
+
+@layer utilities {
+  .reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity 0.55s ease,
+      transform 0.55s ease;
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .hero-fade {
+    animation: heroFade 0.7s ease forwards;
+  }
+
+  .hero-fade-delay {
+    animation: heroFade 0.7s ease 0.12s forwards;
+    opacity: 0;
+  }
+
+  .nav-reveal {
+    animation: navReveal 0.5s ease forwards;
+  }
+}
+
+@keyframes heroFade {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes navReveal {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

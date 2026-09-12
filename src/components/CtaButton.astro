@@ -1,0 +1,34 @@
+---
+import { whatsappUrl } from '../data/site';
+
+interface Props {
+  href?: string;
+  label?: string;
+  variant?: 'primary' | 'secondary' | 'ghost';
+  external?: boolean;
+  class?: string;
+}
+
+const {
+  href = whatsappUrl(),
+  label = 'Demander un devis',
+  variant = 'primary',
+  external = href.includes('wa.me') || href.startsWith('http'),
+  class: className = '',
+} = Astro.props;
+
+const variants = {
+  primary: 'btn-primary',
+  secondary: 'btn-secondary',
+  ghost: 'btn-ghost',
+};
+---
+
+<a
+  href={href}
+  class:list={[variants[variant], className]}
+  target={external ? '_blank' : undefined}
+  rel={external ? 'noopener noreferrer' : undefined}
+>
+  {label}
+</a>

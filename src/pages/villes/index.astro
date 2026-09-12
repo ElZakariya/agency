@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { cities, site, services } from '../../data/site';
+---
+
+<BaseLayout
+  title="Développeur web par ville au Maroc — Dakhla, El Kelaa, Casa…"
+  description="Pages locales DevStudio : création de sites web et apps à Dakhla, El Kelaa des Sraghna, Casablanca, Marrakech, Agadir et Rabat."
+  canonicalPath="/villes"
+  jsonLd={{
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'Villes couvertes par DevStudio au Maroc',
+    url: `${site.url}/villes`,
+    description:
+      'Pages SEO locales DevStudio pour Dakhla, El Kelaa des Sraghna, Casablanca, Marrakech, Agadir et Rabat.',
+    hasPart: cities.map((c) => ({
+      '@type': 'WebPage',
+      name: c.title,
+      url: `${site.url}/villes/${c.slug}`,
+    })),
+  }}
+>
+  <section class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
+    <Breadcrumbs items={[{ name: 'Villes', href: '/villes' }]} />
+    <h1 class="text-4xl font-bold sm:text-5xl">Nos villes au Maroc</h1>
+    <p class="mt-4 max-w-2xl text-lg text-muted">
+      Priorité SEO locale à Dakhla et El Kelaa des Sraghna ; couverture active à Casablanca, Marrakech, Agadir, Rabat — et livraison à distance partout au Maroc.
+    </p>
+
+    <ul class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        cities.map((city) => (
+          <li>
+            <a href={`/villes/${city.slug}`} class="reveal dither-panel block p-6 hover:border-primary">
+              <div class="relative">
+                <h2 class="font-display text-xl font-semibold text-text">{city.name}</h2>
+                <p class="mt-2 text-sm text-muted">{city.intro}</p>
+                <span class="mt-4 inline-block text-sm font-semibold text-primary">Voir la page →</span>
+              </div>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="reveal mt-16">
+      <h2 class="text-2xl font-bold">Services disponibles partout</h2>
+      <ul class="mt-4 flex flex-wrap gap-3">
+        {
+          services.map((s) => (
+            <li>
+              <a
+                href={s.href}
+                class="inline-flex min-h-11 items-center rounded-[var(--radius-sm)] border border-line px-4 py-2 text-sm font-medium hover:border-primary hover:text-primary"
+              >
+                {s.title}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="mt-6 text-sm text-muted">
+        Guides utiles :
+        <a href="/blog" class="font-semibold text-primary hover:underline">blog SEO</a>
+        {' · '}
+        <a href="/a-propos" class="font-semibold text-primary hover:underline">à propos</a>
+        {' · '}
+        <a href="/contact" class="font-semibold text-primary hover:underline">contact</a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>

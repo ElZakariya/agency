@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import CtaButton from '../components/CtaButton.astro';
+import Icon from '../components/Icon.astro';
+import { site, services, cities, whatsappUrl } from '../data/site';
+---
+
+<BaseLayout
+  title="À propos de DevStudio — agence digitale au Maroc"
+  description="DevStudio est une agence de développement web, applications web et mobiles au Maroc, ancrée à Dakhla et El Kelaa des Sraghna, active à Casablanca, Marrakech, Agadir et Rabat."
+  canonicalPath="/a-propos"
+  jsonLd={{
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    name: `À propos de ${site.name}`,
+    url: `${site.url}/a-propos`,
+    mainEntity: {
+      '@type': 'Organization',
+      name: site.name,
+      url: site.url,
+      description: site.description,
+    },
+  }}
+>
+  <article class="mx-auto max-w-3xl px-4 py-14 sm:px-6 sm:py-20">
+    <Breadcrumbs items={[{ name: 'À propos', href: '/a-propos' }]} />
+    <h1 class="text-4xl font-bold sm:text-5xl">À propos de {site.name}</h1>
+    <p class="mt-5 text-lg leading-relaxed text-muted">
+      {site.name} est une agence de développement web spécialisée dans la création de sites internet,
+      d’applications web et d’applications mobiles pour les entreprises marocaines.
+    </p>
+    <p class="mt-4 leading-relaxed text-muted">
+      Nous concentrons notre référencement local sur <strong>Dakhla</strong> et
+      <strong>El Kelaa des Sraghna</strong>, tout en accompagnant des clients à
+      <strong>Casablanca</strong>, <strong>Marrakech</strong>, <strong>Agadir</strong>,
+      <strong>Rabat</strong> et partout au Maroc. Notre approche : produits sobres,
+      rapides, SEO-ready — et une communication directe sur WhatsApp.
+    </p>
+
+    <h2 class="mt-12 text-2xl font-bold">Qui nous aidons</h2>
+    <p class="mt-4 leading-relaxed text-muted">
+      Commerces, cabinets, hôtels, startups, PME et associations qui veulent une présence digitale
+      claire : être trouvés sur Google, rassurer les clients, et convertir les visites en messages
+      ou ventes. Nous livrons à distance avec des points de suivi réguliers.
+    </p>
+
+    <h2 class="mt-12 text-2xl font-bold">Nos services</h2>
+    <ul class="mt-4 space-y-3">
+      {
+        services.map((s) => (
+          <li class="flex gap-3">
+            <span class="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-[var(--radius-sm)] bg-primary/10 text-primary">
+              <Icon name={s.icon} size={16} />
+            </span>
+            <div>
+              <a href={s.href} class="font-semibold text-text hover:text-primary">
+                {s.title}
+              </a>
+              <p class="text-sm text-muted">{s.short}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+
+    <h2 class="mt-12 text-2xl font-bold">Nos engagements</h2>
+    <ul class="mt-4 list-disc space-y-2 pl-5 text-muted">
+      <li>Devis clair avant de démarrer</li>
+      <li>Performance et bases SEO dès le premier jour</li>
+      <li>Contenu pensé pour Google et les moteurs d’IA (FAQ, structure, entité claire)</li>
+      <li>Livraison et formation pour être autonome</li>
+      <li>Support WhatsApp après mise en ligne</li>
+    </ul>
+
+    <h2 class="mt-12 text-2xl font-bold">Villes couvertes</h2>
+    <ul class="mt-4 flex flex-wrap gap-2">
+      {
+        cities.map((c) => (
+          <li>
+            <a
+              href={`/villes/${c.slug}`}
+              class="inline-flex min-h-10 items-center rounded-[var(--radius-sm)] border border-line px-3 py-1.5 text-sm font-medium hover:border-primary hover:text-primary"
+            >
+              {c.name}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="mt-3">
+      <a href="/villes" class="text-sm font-semibold text-primary hover:underline">Toutes les villes →</a>
+    </p>
+
+    <p class="mt-10 leading-relaxed text-muted">
+      Retrouvez nos services sur Instagram :
+      <a href={site.instagram} class="font-semibold text-primary hover:underline" target="_blank" rel="noopener noreferrer">
+        @devstudio.ma
+      </a>.
+    </p>
+
+    <div class="mt-12">
+      <CtaButton href={whatsappUrl()} label="Discuter de votre projet" />
+    </div>
+  </article>
+</BaseLayout>
