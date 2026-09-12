@@ -4,7 +4,8 @@ export const site = {
   tagline: 'Agence de développement web, apps & mobile au Maroc',
   description:
     'DevStudio crée des sites web, applications web et applications mobiles pour les entreprises à Dakhla, El Kelaa des Sraghna, Casablanca et partout au Maroc.',
-  url: 'https://devstudio.ma',
+  // Temporary Vercel URL — switch to https://devstudio.ma after buying the domain
+  url: 'https://devstudio-ochre.vercel.app',
   locale: 'fr-MA',
   email: 'elhaouszakariya@gmail.com',
   phone: '+212641519004',

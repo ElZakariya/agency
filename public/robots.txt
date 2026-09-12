@@ -17,5 +17,5 @@ Allow: /
 User-agent: ClaudeBot
 Allow: /
 
-Sitemap: https://devstudio.ma/sitemap-index.xml
-# Machine-readable summary for LLMs: https://devstudio.ma/llms.txt
+Sitemap: https://devstudio-ochre.vercel.app/sitemap-index.xml
+# Machine-readable summary for LLMs: https://devstudio-ochre.vercel.app/llms.txt

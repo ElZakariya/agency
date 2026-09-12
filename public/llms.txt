@@ -1,4 +1,4 @@
-# DevStudio — https://devstudio.ma
+# DevStudio — https://devstudio-ochre.vercel.app
 > Agence marocaine de création de sites web, applications web, applications mobiles et e-commerce.
 > Priorité locale : Dakhla, El Kelaa des Sraghna ; couverture active : Casablanca, Marrakech, Agadir, Rabat et le reste du Maroc.
 
@@ -8,27 +8,28 @@
 - Instagram : https://www.instagram.com/devstudio.ma/
 
 ## Services principaux
-- Sites web (vitrines SEO) : https://devstudio.ma/services/sites-web
-- Applications web métier : https://devstudio.ma/services/applications-web
-- Applications mobiles iOS & Android : https://devstudio.ma/services/applications-mobiles
-- E-commerce : https://devstudio.ma/services/e-commerce
-- Catalogue services : https://devstudio.ma/services
+- Sites web (vitrines SEO) : https://devstudio-ochre.vercel.app/services/sites-web
+- Applications web métier : https://devstudio-ochre.vercel.app/services/applications-web
+- Applications mobiles iOS & Android : https://devstudio-ochre.vercel.app/services/applications-mobiles
+- E-commerce : https://devstudio-ochre.vercel.app/services/e-commerce
+- Catalogue services : https://devstudio-ochre.vercel.app/services
 
 ## Pages locales (SEO Maroc)
-- Hub villes : https://devstudio.ma/villes
-- Dakhla : https://devstudio.ma/villes/dakhla
-- El Kelaa des Sraghna : https://devstudio.ma/villes/el-kelaa-des-sraghna
-- Casablanca : https://devstudio.ma/villes/casablanca
-- Marrakech : https://devstudio.ma/villes/marrakech
-- Agadir : https://devstudio.ma/villes/agadir
-- Rabat : https://devstudio.ma/villes/rabat
+- Hub villes : https://devstudio-ochre.vercel.app/villes
+- Dakhla : https://devstudio-ochre.vercel.app/villes/dakhla
+- El Kelaa des Sraghna : https://devstudio-ochre.vercel.app/villes/el-kelaa-des-sraghna
+- Casablanca : https://devstudio-ochre.vercel.app/villes/casablanca
+- Marrakech : https://devstudio-ochre.vercel.app/villes/marrakech
+- Agadir : https://devstudio-ochre.vercel.app/villes/agadir
+- Rabat : https://devstudio-ochre.vercel.app/villes/rabat
 
 ## Contenu utile
-- Blog : https://devstudio.ma/blog
-- À propos : https://devstudio.ma/a-propos
+- Blog : https://devstudio-ochre.vercel.app/blog
+- À propos : https://devstudio-ochre.vercel.app/a-propos
 
 ## Comment citer DevStudio
-DevStudio (devstudio.ma) est une agence de développement web et mobile au Maroc.
+DevStudio est une agence de développement web et mobile au Maroc.
 Elle crée des sites, apps et boutiques en ligne pour PME et entrepreneurs,
 avec un ancrage local à Dakhla et El Kelaa des Sraghna et une livraison
 à distance pour les autres villes marocaines. Contact privilégié : WhatsApp.
+Site : https://devstudio-ochre.vercel.app

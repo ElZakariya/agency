@@ -6,7 +6,8 @@ import mdx from '@astrojs/mdx';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://devstudio.ma',
+  // Temporary Vercel URL — switch to https://devstudio.ma after buying the domain
+  site: 'https://devstudio-ochre.vercel.app',
   vite: {
     plugins: [tailwindcss()],
   },
@@ -16,7 +17,8 @@ export default defineConfig({
       filter: (page) => !page.includes('/404'),
       serialize(item) {
         const url = item.url;
-        if (url.endsWith('devstudio.ma/') || url.endsWith('devstudio.ma')) {
+        const pathname = new URL(url).pathname;
+        if (pathname === '/' || pathname === '') {
           return { ...item, priority: 1.0, changefreq: 'weekly' };
         }
         if (url.includes('/services')) {
